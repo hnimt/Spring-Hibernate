@@ -1,0 +1,64 @@
+package com.Minh.hibernate.demo.start;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.Minh.hibernate.demo.entity.Student;
+
+public class ReadStudentDemo {
+
+	public static void main(String[] args) {
+		
+//		create session factory
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class)
+				.buildSessionFactory();
+				
+//		create session
+		Session session = factory.getCurrentSession();
+		
+		try {		
+//			create a student object
+			System.out.println("Creating new student object...");
+			Student tempStudent = new Student("Minh", "Cong", "congminh@.com");
+			
+//			start a transaction
+			session.beginTransaction();
+			
+//			save the student object
+			System.out.println("Saving the student ...");
+			session.save(tempStudent);
+			System.out.println("Get id new student: " + tempStudent.getId());
+			
+//			commit trasaction
+			session.getTransaction().commit();
+			
+//			NEW RETRIEVE CODE:
+
+//			Point out what id we are finding
+			System.out.println("We are finding id: " + tempStudent.getId());
+			
+//			Redefine session and create new transaction:
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+//			Retrieve student via transaction:
+			Student myStudent = session.get(Student.class, tempStudent.getId());
+			System.out.println("Get completed mystudent" + myStudent);
+			
+//			Commit transaction:
+			session.getTransaction().commit();	
+			System.out.println("Done!");
+			
+		} finally {
+			factory.close();
+		}
+		
+		
+		
+		
+	}
+
+}
