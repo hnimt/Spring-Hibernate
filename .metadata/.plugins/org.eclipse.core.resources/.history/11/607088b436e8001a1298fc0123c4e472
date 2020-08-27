@@ -1,0 +1,5 @@
+package com.Minh.hibernate.demo.entity;
+
+public class Student {
+
+}
