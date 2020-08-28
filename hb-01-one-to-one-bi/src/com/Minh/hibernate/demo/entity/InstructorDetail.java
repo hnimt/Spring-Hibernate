@@ -38,6 +38,9 @@ public class InstructorDetail {
 	
 	@OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
 	private Instructor instructor;
+	
+	public InstructorDetail() {
+	}
 
 	public InstructorDetail(String youtubeChannel, String hobby) {
 		this.youtubeChannel = youtubeChannel;

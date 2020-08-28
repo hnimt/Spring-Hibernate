@@ -38,6 +38,9 @@ public class Instructor {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetail instructorDetail;
+	
+	public Instructor() {
+	}
 
 	public Instructor(String firstName, String lastName, String email) {
 		this.firstName = firstName;
