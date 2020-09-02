@@ -10,7 +10,7 @@ import com.Minh.hibernate.demo.entity.InstructorDetail;
 import com.Minh.hibernate.demo.entity.Review;
 import com.Minh.hibernate.demo.entity.Student;
 
-public class CreateCourseAndReviewDemo {
+public class CreateCourseAndStudentDemo {
 
 	public static void main(String[] args) {
 		
@@ -21,7 +21,6 @@ public class CreateCourseAndReviewDemo {
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(Course.class)
 				.addAnnotatedClass(Review.class)
-				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 				
 //		create session
@@ -34,26 +33,18 @@ public class CreateCourseAndReviewDemo {
 //			create course
 			Course tempCourse = new Course("Data Science");
 			
-//			Create student
-			Student tempStudent1 = new Student("Tong", "Minh", "tongminh23996@gmail.com");
-			Student tempStudent2 = new Student("Cong", "Minh", "congminh23996@gmail.com");
-			Student tempStudent3 = new Student("Minh", "Minh", "minhminh23996@gmail.com");
-			
-//			Add student
-			tempCourse.addStudent(tempStudent1);
-			tempCourse.addStudent(tempStudent2);
-			tempCourse.addStudent(tempStudent3);
+//			Create reviews
+			tempCourse.addReview(new Review("I love it so much"));
+			tempCourse.addReview(new Review("I hate it a little bit"));
+			tempCourse.addReview(new Review("It's quite good course"));
 			
 //			Save course
 			session.save(tempCourse);
 			
-//			Save student
-			session.save(tempStudent1);
-			session.save(tempStudent2);
-			session.save(tempStudent3);
+//			commit trasaction
+			session.getTransaction().commit();
 			
-			System.out.println("My course is: " + tempCourse);
-			
+			System.out.println("Done!");
 //			commit trasaction
 			session.getTransaction().commit();
 			
