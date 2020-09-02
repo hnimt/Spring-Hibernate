@@ -10,7 +10,7 @@ import com.Minh.hibernate.demo.entity.InstructorDetail;
 import com.Minh.hibernate.demo.entity.Review;
 import com.Minh.hibernate.demo.entity.Student;
 
-public class CreateCourseAndReviewDemo {
+public class GetCourseAndReviewDemo {
 
 	public static void main(String[] args) {
 		
@@ -30,21 +30,14 @@ public class CreateCourseAndReviewDemo {
 //			Start transaction
 			session.beginTransaction();
 			
-//			create course
-			Course tempCourse = new Course("Data Science");
+//			Get course
+			int theId = 10;
+			Course tempCourse = session.get(Course.class, theId);
+			System.out.println("Print course: " + tempCourse);
 			
-//			Create reviews
-			tempCourse.addReview(new Review("I love it so much"));
-			tempCourse.addReview(new Review("I hate it a little bit"));
-			tempCourse.addReview(new Review("It's quite good course"));
+//			Get review
+			System.out.println("Print reviews: " + tempCourse.getReviews());
 			
-//			Save course
-			session.save(tempCourse);
-			
-//			commit trasaction
-			session.getTransaction().commit();
-			
-			System.out.println("Done!");
 //			commit trasaction
 			session.getTransaction().commit();
 			
